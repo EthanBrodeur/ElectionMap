@@ -49,6 +49,12 @@
         .attr("font-size", "35px")
         .attr("text-anchor", "middle");
 
+        canvas.append("svg:image")
+        .attr('x', 0)
+        .attr('y', height/2.95)
+        .attr('width', 180)
+        .attr('height', 300)
+        .attr("xlink:href", "imgs/2016.jpg");
 
         //var years=[];
         //var parties =[];
@@ -214,13 +220,13 @@
 
         var xStatePos = d3.scaleLinear()
         .domain([0,11])
-        .range([width*.1,width*.9]);
+        .range([width*.15,width*.9]);
 
         var yStatePos = d3.scaleLinear()
         .domain([0,7])
         .range([height*.25, height*.9]);
 
-        let rectWidth = width*.07;
+        let rectWidth = width*.065;
         let rectHeight = height*.09;
 
         function stateColor(d, demp, repp){
@@ -274,6 +280,9 @@
         }
         function loadMap() {
             canvas.select("text.chart-title").text(yearString.substr(22,4) + " Presidential Election");
+            canvas.selectAll("image")
+            .attr("xlink:href", "imgs/" + yearString.substr(22,4)+".jpg");
+
             d3.csv(yearString, function(data){
                 //console.log(yearString);
                 //console.log(data);
@@ -358,6 +367,8 @@
                 .on("mouseout", function (d) {clearToolTip(d)});
 
             });
+
+
         }
         function drawToolTip(d) {
             var winnerString = "";
